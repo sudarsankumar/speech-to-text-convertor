@@ -1,28 +1,38 @@
+const btn = document.querySelector('.talk')
+const end = document.querySelector('.end')
+const instructions = document.getElementById('instructions')
+const content = document.querySelector('.content')
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
-var recognition = new speechRecognition();
-var textbox = $("#textbox")
-var instructions = $("#instructions")
-var content = ''
-recognition.continuous = true
-recognition.onstart = function() {
-    instructions.text("Voice Recognition is On")
+const recognition = new SpeechRecognition()
+var speech = ''
+recognition.onstart= function()
+{
+    instructions.innerText = "Recognition is on\n Press Button to Stop"
+    btn.style.display = "none"
+    end.style.display = "block"
 }
-recognition.onspeechend = function() {
-    instructions.text("No Activity")
+recognition.onspeechend = function()
+{
+    instructions.text("No activity")
+    recognition.stop()
 }
-recognition.onerror = function() {
+recognition.onerror = function()
+{
     instructions.text("Try Again")
 }
-recognition.onresult = function(event) {
-    var current = event.resultIndex
-    var transcript = event.results[current][0].transcript
-    content += transcript
-    textbox.val(content)
+recognition.continuous = true
+recognition.onresult = function(event) 
+{
+    const current = event.resultIndex
+    const transcript = event.results[current][0].transcript
+    speech += transcript
+    content.innerText = speech
+    console.log(transcript)
 }
-$("#start-btn").click(function(event) {
-    if(content.length)
-    {
-        content += ''
-    }
+btn.addEventListener('click' ,() => {
     recognition.start()
+})
+end.addEventListener('click' ,() => {
+    recognition.stop()
+    window.location.reload()
 })

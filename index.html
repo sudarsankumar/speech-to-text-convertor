@@ -14,13 +14,16 @@
             Speech to Text Convertor using Javascript
         </h1>
         <div class="form-group">
-            <textarea id="textbox" rows="6" class="form-control"></textarea>
+            <textarea id="textbox" rows="6" class="form-control content"></textarea>
         </div>
         <div class="form-group">
-            <button id="start-btn" class="btn btn-danger btn-block font-weight-bolder">
+            <button id="start-btn" class="btn btn-danger talk btn-block font-weight-bolder">
                 Start
             </button>
-            <p id="instructions">Press Start to Start</p>
+            <button id="stop-btn" style="display: none;" class="btn btn-danger end btn-block font-weight-bolder">
+                Stop
+            </button>
+            <p id="instructions" class="instructions">Press Button to Start</p>
         </div>
     </div>
     <script src="script.js"></script>
